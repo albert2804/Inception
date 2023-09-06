@@ -9,10 +9,19 @@ services:
     container_name: nginx_container
     build: ./requirements/nginx/.
     image: nginx_image
-    ports:
-     - "443:443"
-    networks:
-     - inception
-    env_file:
-     - .env
+    ports: 
+      - "443:443"
+    networks: 
+      - inception
+    env_file: .env
+
+  mariadb_service:
+    container_name: mariadb_container
+    build: ./requirements/mariadb/.
+    image: mariadb_image
+    ports: 
+      - "3306:3306"
+    networks: 
+      - inception
+    env_file: .env
 
