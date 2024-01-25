@@ -1,10 +1,10 @@
-FROM alpine:3.18
+FROM debian:buster
 
-RUN apk update && \
-    apk add nano && \
-    apk add openrc && \
-    apk add gettext && \
-    apk add mariadb mariadb-client mariadb-openrc
+RUN apt-get update && \
+    apt-get install \
+    nano \
+    gettext \
+    mariadb-server -y
     
 COPY init_wpdb_template.sql /
 COPY wp_db.sh /
