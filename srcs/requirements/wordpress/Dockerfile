@@ -3,6 +3,7 @@ FROM alpine:3.18
 RUN apk --no-cache add \
     curl \
     bash \
+    nano \
     php81 \
     php81-mysqli \
     php81-json \

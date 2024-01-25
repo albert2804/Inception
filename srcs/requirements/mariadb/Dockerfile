@@ -1,10 +1,13 @@
 FROM alpine:3.18
 
 RUN apk update && \
-    apk add nano && \
-    apk add openrc && \
-    apk add gettext && \
-    apk add mariadb mariadb-client mariadb-openrc
+    apk add nano \
+    bash \
+    openrc \
+    gettext \
+    mariadb \
+    mariadb-client \
+    mariadb-openrc
     
 COPY init_wpdb_template.sql /
 COPY wp_db.sh /

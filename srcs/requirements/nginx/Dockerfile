@@ -3,10 +3,11 @@ FROM alpine:3.18
 
 # Install NGINX, openssl and gettext(envsubst)
 RUN apk update && \
-    apk add nginx &&\
-    apk add openssl &&\
-    apk add gettext &&\ 
-    apk add nano
+    apk add nginx\
+    openssl\
+    gettext\ 
+    nano\
+    bash
 
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
