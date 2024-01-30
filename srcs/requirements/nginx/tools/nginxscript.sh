@@ -10,14 +10,14 @@ echo sslcreated
 chmod +rwx $SSL_CERTIFICATE_KEY
 chmod +rwx $SSL_CERTIFICATE
 # envsubst '$SSL_CERTIFICATE $SSL_CERTIFICATE_KEY' < /etc/nginx/nginx.conf.template > /etc/nginx/http.d/default.conf
-envsubst '$SSL_CERTIFICATE $SSL_CERTIFICATE_KEY' < /etc/nginx/complete_nginx.conf.template > /etc/nginx/nginx.conf
+envsubst '$SSL_CERTIFICATE $SSL_CERTIFICATE_KEY $DOMAIN' < /etc/nginx/complete_nginx.conf.template > /etc/nginx/nginx.conf
 echo envsubst
 # cat /etc/nginx/nginx.conf
 nginx -t
 
-until nc -z -v -w5 wordpress 9000; do
-	sleep 5
-done
+# until nc -z -v -w5 wordpress 9000; do
+# 	sleep 5
+# done
 echo nginx syntax
 #starts nginx in the foreground
 nginx -g 'daemon off;'

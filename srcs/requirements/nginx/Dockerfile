@@ -13,7 +13,8 @@ RUN apk update && \
 COPY conf/complete_nginx.conf.template /etc/nginx/complete_nginx.conf.template
 
 #just used for testing the NGINX WELCOME page, remove later
-RUN mkdir /usr/share/nginx/html
+# RUN mkdir /usr/share/nginx/html
+RUN mkdir /var/www/wordpress
 
 COPY tools/nginxscript.sh /
 RUN chmod +x /nginxscript.sh

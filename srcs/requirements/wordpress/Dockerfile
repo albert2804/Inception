@@ -26,6 +26,8 @@ RUN apk --no-cache add \
 
 RUN  adduser -S nginx && addgroup -S nginx
 
+WORKDIR var/www/wordpress
+
 COPY conf/php-fpm.conf /etc/php81/php-fpm.conf
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 COPY tools/wp.sh /

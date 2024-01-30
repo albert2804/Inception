@@ -21,14 +21,13 @@ dir:
 	mkdir -m 744 -p ${DB_VOLUME}
 
 clean: down
-	docker rmi nginx_image
-	docker rmi wp_image
-	docker rmi mariadb_image
+	docker rmi nginx
+	docker rmi wordpress
+	docker rmi mariadb
 	-@docker system prune --all --force --volumes
 	-@docker volume prune --force
 	-@docker network prune --force	
 	sudo rm -rf ${WP_VOLUME}
 	sudo rm -rf ${DB_VOLUME}
-
 
 .PHONY: all clean build up dir

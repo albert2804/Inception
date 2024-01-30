@@ -3,21 +3,23 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx/.
-    image: nginx_image
+    image: nginx
     ports: 
       - "443:443"
     networks: 
       - inception
     volumes:
-      - v_wordpress:/usr/share/nginx/html
+      - v_wordpress:/var/www/wordpress
     restart: unless-stopped
     env_file: .env
+    depends_on:
+      - wordpress
 
   mariadb:
     container_name: mariadb
-    hostname: mariadb_container
+    hostname: mariadb
     build: ./requirements/mariadb/.
-    image: mariadb_image
+    image: mariadb
     ports: 
       - "3306:3306"
     networks: 
@@ -30,15 +32,17 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/.
-    image: wp_image
+    image: wordpress
     ports: 
       - "9000:9000"
     networks: 
       - inception
     volumes:
-      - v_wordpress:/wp
+      - v_wordpress:/var/www/wordpress
     restart: unless-stopped
     env_file: .env
+    depends_on:
+      - mariadb
 
 volumes:
   v_wordpress:

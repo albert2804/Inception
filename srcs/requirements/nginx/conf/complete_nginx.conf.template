@@ -45,10 +45,10 @@ http {
 
 	server {
         listen  443 ssl;
-        root /usr/share/nginx/html;
+        root /var/www/wordpress;
         index index.php
         
-        server_name         aestraic.42.fr;
+        server_name         $DOMAIN;
         ssl_certificate     $SSL_CERTIFICATE;
         ssl_certificate_key $SSL_CERTIFICATE_KEY;
         ssl_protocols       TLSv1.2 TLSv1.3;
