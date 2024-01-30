@@ -30,4 +30,4 @@ clean: down
 	sudo rm -rf ${WP_VOLUME}
 	sudo rm -rf ${DB_VOLUME}
 
-.PHONY: all clean build up dir
+.PHONY: all clean build up dir down
