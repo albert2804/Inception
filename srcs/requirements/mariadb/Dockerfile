@@ -6,18 +6,13 @@ RUN apk update && \
     mariadb \
     mariadb-client \
     gettext
-    # openrc \
-    # mariadb-openrc
     
-COPY init_wpdb_template.sql /
-COPY wp_db.sh /
+COPY /conf/init_wpdb_template.sql /
+COPY tools/wp_db.sh /
 RUN touch init_wpdb.sql
 
 RUN chmod 777 /init_wpdb_template.sql
 RUN chmod 777 /wp_db.sh
 RUN chmod 777 /init_wpdb.sql
 
-# RUN /bin/sh /wp_db.sh
-
 ENTRYPOINT ["/bin/sh", "/wp_db.sh"]
-# CMD ["/bin/sh", "-c", "/wp_db.sh && tail -f /dev/null"]

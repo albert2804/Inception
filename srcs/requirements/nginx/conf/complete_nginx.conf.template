@@ -2,7 +2,7 @@ user nginx;
 
 # Set number of worker processes automatically based on number of CPU cores.
 worker_processes 1;
-pid /run/nginx/nginx.pid
+# pid /run/nginx/nginx.pid
 
 # Enables the use of JIT for regular expressions to speed-up their processing.
 pcre_jit on;
@@ -61,8 +61,7 @@ http {
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_index index.php;
-            fastcgi_pass wp_container:9000;
+            fastcgi_pass wordpress:9000;
         }
 	}
-
 }

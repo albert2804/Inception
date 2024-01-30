@@ -1,18 +1,7 @@
 version: "3.8"
-####################################
-#RENAME CONTAINER TO THE SERVICENAME
-####################################
-####################################
-####################################
-####################################
-####################################
-networks:
-  inception:
-    name: inception
-
 services:
-  nginx_service:
-    container_name: nginx_container
+  nginx:
+    container_name: nginx
     build: ./requirements/nginx/.
     image: nginx_image
     ports: 
@@ -20,12 +9,12 @@ services:
     networks: 
       - inception
     volumes:
-      - /home/aestraic/data/wordpress:/usr/share/nginx/html
+      - v_wordpress:/usr/share/nginx/html
     restart: unless-stopped
     env_file: .env
 
-  mariadb_service:
-    container_name: mariadb_container
+  mariadb:
+    container_name: mariadb
     hostname: mariadb_container
     build: ./requirements/mariadb/.
     image: mariadb_image
@@ -34,23 +23,37 @@ services:
     networks: 
       - inception
     volumes:
-      - /home/aestraic/data/mariadb:/var/lib/mysql
+      - v_mariadb:/var/lib/mysql
     restart: unless-stopped
     env_file: .env
-    # depends_on:
 
-  wp_service:
-    container_name: wp_container
+  wordpress:
+    container_name: wordpress
     build: ./requirements/wordpress/.
     image: wp_image
     ports: 
       - "9000:9000"
     networks: 
       - inception
-    env_file: .env
-    restart: unless-stopped
     volumes:
-      - /home/aestraic/data/wordpress:/wp
-    # depends_on:
-      # - mariadb_service
-      # - nginx_service
+      - v_wordpress:/wp
+    restart: unless-stopped
+    env_file: .env
+
+volumes:
+  v_wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aestraic/data/wordpress
+      o: bind
+  v_mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device:  /home/aestraic/data/mariadb
+      o: bind
+
+networks:
+  inception:
+    driver: bridge

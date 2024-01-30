@@ -9,13 +9,13 @@ RUN apk update && \
     nano\
     bash
 
-COPY nginx.conf.template /etc/nginx/nginx.conf.template
+# COPY nginx.conf.template /etc/nginx/nginx.conf.template
+COPY conf/complete_nginx.conf.template /etc/nginx/complete_nginx.conf.template
 
 #just used for testing the NGINX WELCOME page, remove later
 RUN mkdir /usr/share/nginx/html
-# COPY index.html /usr/share/nginx/html
 
-COPY nginxscript.sh /
+COPY tools/nginxscript.sh /
 RUN chmod +x /nginxscript.sh
 
 # Start NGINX and create a sslkey and store it in the CERT-directory
