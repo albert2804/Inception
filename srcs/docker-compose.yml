@@ -1,8 +1,14 @@
 version: "3.8"
-
+####################################
+#RENAME CONTAINER TO THE SERVICENAME
+####################################
+####################################
+####################################
+####################################
+####################################
 networks:
   inception:
-    name: Inception
+    name: inception
 
 services:
   nginx_service:
@@ -15,6 +21,7 @@ services:
       - inception
     volumes:
       - /home/aestraic/data/wordpress:/usr/share/nginx/html
+    restart: unless-stopped
     env_file: .env
 
   mariadb_service:
@@ -28,6 +35,7 @@ services:
       - inception
     volumes:
       - /home/aestraic/data/mariadb:/var/lib/mysql
+    restart: unless-stopped
     env_file: .env
     # depends_on:
 
@@ -36,10 +44,11 @@ services:
     build: ./requirements/wordpress/.
     image: wp_image
     ports: 
-      - "8080:80"
+      - "9000:9000"
     networks: 
       - inception
     env_file: .env
+    restart: unless-stopped
     volumes:
       - /home/aestraic/data/wordpress:/wp
     # depends_on:

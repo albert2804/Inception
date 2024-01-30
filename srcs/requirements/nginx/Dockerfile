@@ -13,7 +13,7 @@ COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
 #just used for testing the NGINX WELCOME page, remove later
 RUN mkdir /usr/share/nginx/html
-COPY index.html /usr/share/nginx/html
+# COPY index.html /usr/share/nginx/html
 
 COPY nginxscript.sh /
 RUN chmod +x /nginxscript.sh

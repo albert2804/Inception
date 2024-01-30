@@ -1,30 +1,21 @@
-#user serkek;
-worker_processes  1;
-
-events {
-    worker_connections  1024;
-}
-
-http {
-
-    keepalive_timeout  15;
-
-    server {
-        listen       443;
-        server_name  serkekserver;
-
-        ssl_certificate $SSL_CERTIFICATE;
-        ssl_certificate_key $SSL_CERTIFICATE_KEY;
-        ssl_protocols TLSv1.2 TLSv1.3;
+server {
+        listen  443 ssl;
+        root /usr/share/nginx/html;
+        index index.php
         
-        location / {
-            root   /usr/share/nginx/html;
-            index  index.html index.htm;
-        }
+        server_name         aestraic.42.fr;
+        ssl_certificate     $SSL_CERTIFICATE;
+        ssl_certificate_key $SSL_CERTIFICATE_KEY;
+        ssl_protocols       TLSv1.2 TLSv1.3;
 
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   /usr/share/nginx/html;
+        location / {
+            try_files $uri $uri/ =404;
         }
-    }
+        
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_index index.php;
+            fastcgi_pass wp_container:9000;
+        }
 }

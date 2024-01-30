@@ -1,10 +1,15 @@
 all:
-	sudo docker compose up
+# sudo rm -rf /home/aestraic/data/mariadb/*
+# sudo rm -rf /home/aestraic/data/wordpress/*
+	docker compose up --build
 
 down:
-	sudo docker compose down
-	sudo docker rmi nginx_image
-	sudo docker rmi wp_image
-	sudo docker rmi mariadb_image
+	docker compose down
+	docker rmi nginx_image
+	docker rmi wp_image
+	docker rmi mariadb_image
+	@docker system prune --all --force --volumes
+	@docker volume prune --force
+	@docker network prune --force	
 	sudo rm -rf /home/aestraic/data/mariadb/*
 	sudo rm -rf /home/aestraic/data/wordpress/*

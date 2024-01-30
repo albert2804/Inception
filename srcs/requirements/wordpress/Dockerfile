@@ -20,10 +20,16 @@ RUN apk --no-cache add \
     php81-tokenizer \
     php81-ctype \
     php81-fpm \
-    php81-phar
+    php81-phar \
+    php81-mbstring
 
+RUN  adduser -S nginx && addgroup -S nginx
+
+COPY php-fpm.conf /etc/php81/php-fpm.conf
+COPY www.conf /etc/php81/php-fpm.d/www.conf
 COPY wp.sh /
 RUN chmod +x /wp.sh
 
-CMD ["/bin/sh", "-c", "/wp.sh && tail -f /dev/null"]
+# CMD ["/bin/sh", "-c", "/wp.sh && tail -f /dev/null"]
+CMD ["/bin/sh", "/wp.sh"]
 
