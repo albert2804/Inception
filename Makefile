@@ -24,9 +24,9 @@ clean: down
 	docker rmi nginx
 	docker rmi wordpress
 	docker rmi mariadb
-	-@docker system prune --all --force --volumes
-	-@docker volume prune --force
-	-@docker network prune --force	
+	docker system prune --all --force --volumes
+	docker volume prune --force
+	docker network prune --force	
 	sudo rm -rf ${WP_VOLUME}
 	sudo rm -rf ${DB_VOLUME}
 
